@@ -1,35 +1,38 @@
-import Realm from 'realm'
+import Realm from 'realm';
+import realm from './realm.js';
 
-export class NoteRealm {
+export default class NoteRealm {
     static schema = {
         //schema for Notes
         name: 'Notes',
         primaryKey:"id",
         properties: 
         {
-            id: 'int',
+            id: 'string',
             priority:'int',
             title: 'string', 
             category: 'string', 
             description: 'string', 
-            created: 'string', 
-            updated: 'string',
-            edited:'boolean', 
+            created: 'date', 
+            updated: 'date',
+            edited:'bool',
+            notification: 'bool',
+            notification_date:'date', 
         }
     }
     //method to remove notes
     static removerNotes(realmObj){
-        return Realm.delete(realmObj);
+        return realm.delete(realmObj);
     }
 
     //method to return all notes
     static getAllNotes(){
-        return Realm.objects('Notes');
+        return realm.objects('Notes');
     }
 
     //method to return l notes
     static getNote(note){
-        return Realm.objects('Notes','id' == note.id);
+        return realm.objects('Notes','id' == note.id);
     }
 
     //method to write note
@@ -43,31 +46,33 @@ export class NoteRealm {
             title: note.title,
             category: note.category,
             description: note.description,
-            created: today.toDateString(), // format date,
-            updated: today.toDateString(), // format date, 
+            notification:note.notification,
+            notification_date:note.notification_date,
+            created: today, 
+            updated: today, 
             edited:note.edited,
              })
         )
     }
     
     //method to update note
-    static updateTask (note) {
-        let result = Realm.objects('Notes').filtered('id' = note.id);
-        if (result){
-            var today = new Date(); // current date
+    // static updateTask (note) {
+    //     let result = Realm.objects('Notes').filtered('id' = note.id);
+    //     if (result){
+    //         var today = new Date(); // current date
             
-            realm.write(() =>
-                result.priority= note.priority,
-                result.title = note.title,
-                result.category = note.category,
-                resultdescription = note.description,
-                result.updated = today.toDateString(), // format date, 
-                result.edited =note.edited,
-            )
-        } else {
-            msg = "Somthing wrong with Db try again";
-            return msg;
-        }
-    }    
+    //         realm.write(() =>
+    //             result.priority= note.priority,
+    //             result.title = note.title,
+    //             result.category = note.category,
+    //             resultdescription = note.description,
+    //             result.updated = today.toDateString(), // format date, 
+    //             result.edited =note.edited,
+    //         )
+    //     } else {
+    //         msg = "Somthing wrong with Db try again";
+    //         return msg;
+    //     }
+    // }    
 }
 

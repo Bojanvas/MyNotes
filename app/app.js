@@ -9,36 +9,46 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Dimensions
 } from 'react-native';
+import Button from './components/Button';
+import GetScreen from './components/getScreen';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button fffor dev menu',
-});
 
 export default class App extends Component<{}> {
+
+  static navigationOptions = {
+    // mavigation header
+    title: 'MyNotes',
+    headerTintColor: 'white',
+    headerStyle: {
+    backgroundColor: '#33afd4', 
+    elevation: null
+    },
+    headerTitleStyle: {
+      fontWeight:'200',
+      fontFamily: 'spectral'
+    }
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Welcome to Your Notes
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <GetScreen />
+        <Button navigation={this.props.navigation}/>
       </View>
     );
   }
 }
-
+var {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
+    height:height,
+    width:width,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -46,12 +56,9 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontSize: 20,
+    flex: 1,
     textAlign: 'center',
     margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    fontFamily: 'spectral'
   },
 });

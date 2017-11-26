@@ -9,6 +9,10 @@
 	"dependencies": {
 		"react": "16.0.0",
 		"react-native": "0.50.1",
+		"react-native-action-button": "^2.8.1",
+		"react-native-datepicker": "^1.6.0",
+		"react-native-ui-xg": "0.0.6",
+		"react-native-vector-icons": "^4.4.2",
 		"react-navigation": "^1.0.0-beta.19",
 		"realm": "^2.0.2"
 	},
@@ -20,5 +24,10 @@
 	},
 	"jest": {
 		"preset": "react-native"
+	},
+	"rnpm": {
+		"assets": [
+			"./assets/fonts"
+		]
 	}
 }

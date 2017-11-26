@@ -9,12 +9,12 @@ import {
  
 } from 'react-native';
 
-import App from './app/app';
+import { Nav } from './app/config/routes.js';
 
 export default class myNotes extends Component<{}> {
   render() {
     return (
-        <App />
+        <Nav />
     );
   }
 }
